@@ -30,33 +30,39 @@ function shuffleDeck() {
 
 let shuffledDeck = shuffleDeck()
 
+// give the current score of a hand
+function handValue(array) {
+    let score = 0;
+    let aceArray = [];
+    // goes through cards
+    for (let i = 0; i < array.length; i++) {
+        // gets card rank (i.e ace, 4, jack)
+        const rank = array[i].split(" ")[0];
+        if (rank === 'jack' || rank === 'queen' || rank === 'king') {
+            score += 10;
+        }
+        else if (rank === 'ace') {
+            score += 11;
+            aceArray.push(rank);
+        }
+        else {
+            score += Number(rank);
+        }
+    }
+    for (ace = 0; ace < aceArray.length; ace++) {
+        if (score > 21) {
+            score -= 10;
+        }
+    }
+    return score
+}
+
 // picks the dealer's cards
 function dealerCards() {
     dealer = [];
     dealer.push(shuffledDeck[0], shuffledDeck[1]);
     return dealer
 }
-
 console.log((dealerCards()));
 
-// give the current score of a hand
-function handValue(array) {
-    let score = 0;
-    // goes through cards
-    for (let i = 0; i < array.length; i++) {
-        // gets card rank (i.e ace, 4, jack)
-        const rank = array[i].split(" ")[0];
-        console.log(rank)
-        if (rank === 'jack' || rank === 'queen' || rank === 'king') {
-            score += 10;
-        }
-        else if (rank === 'ace') {
-            score += 11;
-        }
-        else {
-            score += Number(rank)
-        }
-    }
-    return score
-}
 console.log(handValue(dealerCards()));
