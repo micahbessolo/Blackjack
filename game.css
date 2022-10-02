@@ -32,3 +32,23 @@ h4 {
 button {
     border-radius: 5px;
 }
+
+#dealer {
+    background-color: lightgrey;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    height: 300px;
+    border-radius: 5px;
+    display: none;
+}
+
+#player {
+    background-color: lightgrey;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    height: 300px;
+    border-radius: 5px;
+    display: none;
+}
