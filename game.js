@@ -1,7 +1,7 @@
 const cards = ['ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
 const suits = ['clubs', 'spades', 'hearts', 'diamonds'];
 
-function straightDeck() {
+export function straightDeck() {
     let deck = [];
     for (let c = 0; c < cards.length; c++) {
         for (let s = 0; s < suits.length; s++) {
@@ -13,7 +13,7 @@ function straightDeck() {
 
 let deck = straightDeck();
 
-function shuffleDeck() {
+export function shuffleDeck() {
     let shuffledDeck = [];
     let sortedDeck = deck;
     while (sortedDeck.length > 0) {
@@ -31,7 +31,7 @@ function shuffleDeck() {
 let shuffledDeck = shuffleDeck()
 
 // give the current score of a hand
-function handValue(array) {
+export function handValue(array) {
     let score = 0;
     let aceArray = [];
     // goes through cards
@@ -58,11 +58,12 @@ function handValue(array) {
 }
 
 // picks the dealer's cards
-function dealerCards() {
+export function dealerCards() {
     dealer = [];
     dealer.push(shuffledDeck[0], shuffledDeck[1]);
     return dealer
 }
-console.log((dealerCards()));
+// console.log((dealerCards()));
 
-console.log(handValue(dealerCards()));
+// console.log(handValue(dealerCards()));
+
