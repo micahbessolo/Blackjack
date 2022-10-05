@@ -63,7 +63,7 @@ export function dealerCards() {
     dealer.push(shuffledDeck[0], shuffledDeck[1]);
     return dealer
 }
-// console.log((dealerCards()));
+console.log((dealerCards()));
 
-// console.log(handValue(dealerCards()));
+console.log(handValue(dealerCards()));
 
