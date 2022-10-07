@@ -83,3 +83,10 @@ document.querySelector('button').addEventListener('click', function(){
     '<div>Player\'s Cards</div>' + playerCards();
     player.style.display = 'block';
 })
+
+// adds 1 card to the hand
+function addCard(n) {
+    const array = playerCards();
+    const count = array.push(shuffledDeck[n + 3]);
+    console.log(array);
+}
