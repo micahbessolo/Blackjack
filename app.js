@@ -30,33 +30,6 @@ function shuffleDeck() {
 
 let shuffledDeck = shuffleDeck()
 
-// give the current score of a hand
-function handValue(array) {
-    let score = 0;
-    let aceArray = [];
-    // goes through cards
-    for (let i = 0; i < array.length; i++) {
-        // gets card rank (i.e ace, 4, jack)
-        const rank = array[i].split(" ")[0];
-        if (rank === 'jack' || rank === 'queen' || rank === 'king') {
-            score += 10;
-        }
-        else if (rank === 'ace') {
-            score += 11;
-            aceArray.push(rank);
-        }
-        else {
-            score += Number(rank);
-        }
-    }
-    for (ace = 0; ace < aceArray.length; ace++) {
-        if (score > 21) {
-            score -= 10;
-        }
-    }
-    return score
-}
-
 // starting dealer cards
 function dealerCards() {
     let dealer = [];
@@ -71,13 +44,45 @@ function playerCards() {
     return player;
 }
 
+// give the current score of a hand
+function handValue(array) {
+    let score = 0;
+    let aceArray = []; // to revalue aces from 11 to 1 depending on score
+    // goes through array/cards
+    for (let i = 0; i < array.length; i++) {
+        if (!isNaN(array[i])){} // skips over the score (number) that will be pushed to array
+        else if (isNaN(array[i])) {
+            // gets card rank (i.e ace, 4, jack)
+            const rank = array[i].split(" ")[0]; 
+            if (rank === 'jack' || rank === 'queen' || rank === 'king') {
+                score += 10;
+            }
+            else if (rank === 'ace') {
+                score += 11;
+                aceArray.push(rank);
+            }
+            else {
+                score += Number(rank);
+            }
+        }
+    }
+    for (ace = 0; ace < aceArray.length; ace++) {
+        if (score > 21) {
+            score -= 10;
+        }
+    }
+    return score
+}
+
 // adds 1 card to the hand
 let i = 4;
 let array = playerCards();
+
 function addCard() {
-    console.log(i);
     i++
-    const count = array.push(shuffledDeck[4 + i]);
+    array.push(shuffledDeck[4 + i]);
+    // pushing the hand value to the end of the array
+    array.push(handValue(array))
     console.log(array);
     return array
 }
