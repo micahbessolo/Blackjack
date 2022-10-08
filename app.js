@@ -57,17 +57,29 @@ function handValue(array) {
     return score
 }
 
-// picks the dealer's cards
+// starting dealer cards
 function dealerCards() {
     let dealer = [];
     dealer.push(shuffledDeck[0], shuffledDeck[1]);
     return dealer;
 }
 
+// starting player cards
 function playerCards() {
     let player = [];
     player.push(shuffledDeck[2], shuffledDeck[3]);
     return player;
+}
+
+// adds 1 card to the hand
+let i = 4;
+let array = playerCards();
+function addCard() {
+    console.log(i);
+    i++
+    const count = array.push(shuffledDeck[4 + i]);
+    console.log(array);
+    return array
 }
 
 // selects elements
@@ -83,10 +95,3 @@ document.querySelector('button').addEventListener('click', function(){
     '<div>Player\'s Cards</div>' + playerCards();
     player.style.display = 'block';
 })
-
-// adds 1 card to the hand
-function addCard(n) {
-    const array = playerCards();
-    const count = array.push(shuffledDeck[n + 3]);
-    console.log(array);
-}
