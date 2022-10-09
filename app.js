@@ -87,6 +87,24 @@ function addCard() {
     return array
 }
 
+// check button onClick function to add cards to the dealer hand if under 17
+let dealerC = dealerCards();
+
+function updateDealerHand() {
+    if (handValue(dealerC) < 17) {
+        dealerC.push(shuffledDeck[4 + i]);
+        console.log(handValue(dealerC));
+        console.log(dealerC);
+    }
+    else if (handValue(dealerC) > 21) {
+        console.log("dealer busted")
+    }
+    else {
+        console.log("dealer has a good hand")
+    }
+    return dealerC;
+}
+
 // selects elements
 const dealer = document.getElementById('dealer');
 const player = document.getElementById('player');
