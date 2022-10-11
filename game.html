@@ -15,12 +15,14 @@
     </div>
     <button class="mt-2" id=#startGame >Start Game</button>
     <h4>Dealer</h4>
-    <div id="dealer"></div>
+    <div id="dealerHand"></div>
+    <div id="dealerScore"></div>
     <h4>Player</h4>
-    <div id="player"></div>
+    <div id="playerHand"></div>
+    <div id="playerScore"></div>
     <div class="pt-5">
         <button onclick="updateDealerHand();">Check</button>
-        <button onclick="addCard();">Hit me</button>
+        <button onclick="hitMe(); playerHandScore();">Hit me</button>
     </div>
 </body>
 <script src="app.js"></script>

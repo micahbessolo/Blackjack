@@ -74,20 +74,30 @@ function handValue(array) {
     return score
 }
 
+// selects HTML elements to manipulate
+const dealer = document.getElementById('dealerHand');
+const player = document.getElementById('playerHand');
+const dealerScore = document.getElementById('dealerScore');
+const playerScore = document.getElementById('playerScore');
+
 // adds 1 card to the hand
 let i = 4;
 let array = playerCards();
 
-function addCard() {
+function hitMe() {
     i++
     array.push(shuffledDeck[4 + i]);
-    // pushing the hand value to the end of the array
-    array.push(handValue(array))
-    console.log(array);
-    return array
+    player.innerHTML = '<div>Player\'s Cards</div>' + array;
+    return array;
 }
 
-// check button onClick function to add cards to the dealer hand if under 17
+function playerHandScore() {
+    playerScore.style.display = 'block';
+    playerScore.innerHTML = handValue(array);
+    console.log(handValue(array))
+    return handValue(array);
+}
+
 let dealerC = dealerCards();
 
 function updateDealerHand() {
@@ -102,19 +112,15 @@ function updateDealerHand() {
     else {
         console.log("dealer has a good hand")
     }
+    dealerScore.style.display = 'block';
+    dealerScore.innerHTML = handValue(dealerC);
     return dealerC;
 }
 
-// selects elements
-const dealer = document.getElementById('dealer');
-const player = document.getElementById('player');
-
 // gives 'start game' button functionality
 document.querySelector('button').addEventListener('click', function(){
-    dealer.innerHTML = 
-    '<div>Dealer\'s Cards</div>' + dealerCards();
+    dealer.innerHTML = '<div>Dealer\'s Cards</div>' + dealerCards();
     dealer.style.display = 'block';
-    player.innerHTML = 
-    '<div>Player\'s Cards</div>' + playerCards();
+    player.innerHTML = '<div>Player\'s Cards</div>' + playerCards()
     player.style.display = 'block';
 })
