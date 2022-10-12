@@ -1,11 +1,11 @@
-const cards = ['ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king'];
-const suits = ['clubs', 'spades', 'hearts', 'diamonds'];
+const cards = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
+const suits = ['C', 'S', 'H', 'D'];
 
 function straightDeck() {
     let deck = [];
     for (let c = 0; c < cards.length; c++) {
         for (let s = 0; s < suits.length; s++) {
-            deck.push(cards[c] + ' of ' + suits[s])
+            deck.push(cards[c] + suits[s])
         }
     }
     return deck
@@ -50,20 +50,17 @@ function handValue(array) {
     let aceArray = []; // to revalue aces from 11 to 1 depending on score
     // goes through array/cards
     for (let i = 0; i < array.length; i++) {
-        if (!isNaN(array[i])){} // skips over the score (number) that will be pushed to array
-        else if (isNaN(array[i])) {
-            // gets card rank (i.e ace, 4, jack)
-            const rank = array[i].split(" ")[0]; 
-            if (rank === 'jack' || rank === 'queen' || rank === 'king') {
-                score += 10;
-            }
-            else if (rank === 'ace') {
-                score += 11;
-                aceArray.push(rank);
-            }
-            else {
-                score += Number(rank);
-            }
+        // gets card rank (i.e ace, 4, jack)
+        const rank = array[i][0]; 
+        if (rank === 'J' || rank === 'Q' || rank === 'K') {
+            score += 10;
+        }
+        else if (rank === 'A') {
+            score += 11;
+            aceArray.push(rank);
+        }
+        else {
+            score += Number(rank);
         }
     }
     for (ace = 0; ace < aceArray.length; ace++) {
@@ -94,24 +91,20 @@ function hitMe() {
 function playerHandScore() {
     playerScore.style.display = 'block';
     playerScore.innerHTML = handValue(array);
-    console.log(handValue(array))
     return handValue(array);
 }
 
 let dealerC = dealerCards();
 
 function updateDealerHand() {
+    dealer.innerHTML = '<div>Dealer\'s Cards</div>' + dealerCards();
     if (handValue(dealerC) < 17) {
         dealerC.push(shuffledDeck[4 + i]);
-        console.log(handValue(dealerC));
-        console.log(dealerC);
     }
-    else if (handValue(dealerC) > 21) {
-        console.log("dealer busted")
-    }
-    else {
-        console.log("dealer has a good hand")
-    }
+    else if (handValue(dealerC) > 21) {}
+    else {}
+    dealer.innerHTML = '<div>Dealer\'s Cards</div>' + dealerC;
+    dealer.style.display = 'block';
     dealerScore.style.display = 'block';
     dealerScore.innerHTML = handValue(dealerC);
     return dealerC;
@@ -119,8 +112,10 @@ function updateDealerHand() {
 
 // gives 'start game' button functionality
 document.querySelector('button').addEventListener('click', function(){
-    dealer.innerHTML = '<div>Dealer\'s Cards</div>' + dealerCards();
+    dealer.innerHTML = '<div>Dealer\'s Cards</div>' + dealerCards()[0];
     dealer.style.display = 'block';
     player.innerHTML = '<div>Player\'s Cards</div>' + playerCards()
     player.style.display = 'block';
+    playerScore.style.display = 'block';
+    playerScore.innerHTML = handValue(array);
 })
