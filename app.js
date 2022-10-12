@@ -5,7 +5,7 @@ function straightDeck() {
     let deck = [];
     for (let c = 0; c < cards.length; c++) {
         for (let s = 0; s < suits.length; s++) {
-            deck.push(cards[c] + suits[s])
+            deck.push(cards[c] + "-" + suits[s])
         }
     }
     return deck
@@ -51,7 +51,7 @@ function handValue(array) {
     // goes through array/cards
     for (let i = 0; i < array.length; i++) {
         // gets card rank (i.e ace, 4, jack)
-        const rank = array[i][0]; 
+        const rank = array[i].split("-")[0]; 
         if (rank === 'J' || rank === 'Q' || rank === 'K') {
             score += 10;
         }
@@ -81,20 +81,34 @@ const playerScore = document.getElementById('playerScore');
 let i = 4;
 let array = playerCards();
 
+// adds card when 'hit me' is clicked
 function hitMe() {
     i++
     array.push(shuffledDeck[4 + i]);
-    player.innerHTML = '<div>Player\'s Cards</div>' + array;
+    if (handValue(array) > 21) {
+        player.innerHTML = '<div>Player\'s Cards</div>' + array;
+        document.getElementById("hitMeButton").disabled = true;
+    }
+    else {
+        player.innerHTML = '<div>Player\'s Cards</div>' + array;
+    }
     return array;
 }
 
+// displays score when 'hit me' is clicked
 function playerHandScore() {
-    playerScore.style.display = 'block';
-    playerScore.innerHTML = handValue(array);
+    if (handValue(array) > 21) {
+        playerScore.style.display = 'block';
+        playerScore.innerHTML = '<div>Busted</div>';
+    }
+    else {
+        playerScore.style.display = 'block';
+        playerScore.innerHTML = handValue(array);
+    }
     return handValue(array);
 }
 
-let dealerC = dealerCards();
+const dealerC = dealerCards();
 
 function updateDealerHand() {
     dealer.innerHTML = '<div>Dealer\'s Cards</div>' + dealerCards();
