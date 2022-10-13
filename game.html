@@ -14,6 +14,7 @@
         <h1>21 BlackJack</h1>
     </div>
     <button class="mt-2" id=#startGame >Start Game</button>
+    <div id="gameResult"></div>
     <h4>Dealer</h4>
     <div id="dealerHand"></div>
     <div id="dealerScore"></div>
@@ -21,7 +22,7 @@
     <div id="playerHand"></div>
     <div id="playerScore"></div>
     <div class="pt-5">
-        <button onclick="updateDealerHand();">Stay</button>
+        <button id="stayButton" onclick="updateDealerHand(); findWinner();">Stay</button>
         <button id="hitMeButton" onclick="hitMe(); playerHandScore();">Hit me</button>
     </div>
 </body>

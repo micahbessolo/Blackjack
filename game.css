@@ -72,3 +72,8 @@ button {
     border-radius: 5px;
     display: none;
 }
+
+#gameResult {
+    display: none;
+    font-size: larger;
+}
