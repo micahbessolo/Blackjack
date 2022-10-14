@@ -1,34 +1,33 @@
-// selects HTML elements to manipulate
+// HTML elements
 const dealer = document.getElementById('dealerHand');
 const player = document.getElementById('playerHand');
 const dealerScore = document.getElementById('dealerScore');
 const playerScore = document.getElementById('playerScore');
 const gameResult = document.getElementById('gameResult');
 const stayButton = document.getElementById('stayButton');
+const hitMeButton = document.getElementById('hitMeButton');
 
-const cards = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
+const ranks = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
 const suits = ['C', 'S', 'H', 'D'];
 
 function straightDeck() {
     let deck = [];
-    for (let c = 0; c < cards.length; c++) {
-        for (let s = 0; s < suits.length; s++) {
-            deck.push(cards[c] + "-" + suits[s])
+    for (let rank = 0; rank < ranks.length; rank++) {
+        for (let suit = 0; suit < suits.length; suit++) {
+            deck.push(ranks[rank] + "-" + suits[suit])
         }
     }
     return deck
 }
 
-let deck = straightDeck();
-
 function shuffleDeck() {
     let shuffledDeck = [];
-    let sortedDeck = deck;
+    let sortedDeck = straightDeck();
     while (sortedDeck.length > 0) {
-        // gets random position within the sorted deck
+        // pushes random card from sorted deck to shuffled deck
         let randomCard = sortedDeck[Math.floor(Math.random() * sortedDeck.length)];
         shuffledDeck.push(randomCard);
-        // removing the random card from the sorted deck
+        // removes the random card from the sorted deck
         sortedDeck = sortedDeck.filter(function(item) {
             return item !== randomCard;
         });
@@ -36,30 +35,26 @@ function shuffleDeck() {
     return shuffledDeck
 }
 
-let shuffledDeck = shuffleDeck()
+let shuffledDeck = shuffleDeck();
 
-// starting dealer cards
 function dealerStartingHand() {
     let dealer = [];
     dealer.push(shuffledDeck[0], shuffledDeck[1]);
     return dealer;
 }
 
-// starting player cards
-function playerCards() {
+function playerStartingHand() {
     let player = [];
     player.push(shuffledDeck[2], shuffledDeck[3]);
     return player;
 }
 
-// give the current score of a hand
-function handValue(array) {
+function handScore(handArray) {
     let score = 0;
     let aceArray = []; // to revalue aces from 11 to 1 depending on score
-    // goes through array/cards
-    for (let i = 0; i < array.length; i++) {
+    for (let card = 0; card < handArray.length; card++) {
         // gets card rank (i.e ace, 4, jack)
-        const rank = array[i].split("-")[0]; 
+        const rank = handArray[card].split("-")[0]; 
         if (rank === 'J' || rank === 'Q' || rank === 'K') {
             score += 10;
         }
@@ -76,64 +71,64 @@ function handValue(array) {
             score -= 10;
         }
     }
-    return score
+    return score;
 }
 
+let card = 4; // card position in the shuffled deck
+let playerHand = playerStartingHand(); // player's hand, which can be added to
 
-// adds 1 card to the hand
-let i = 4;
-let array = playerCards();
-
-// adds card when 'hit me' is clicked and value isn't over 21
+// adds card to player when 'hit me' is clicked and hand <= 21. displays hand
 function hitMe() {
-    if (handValue(array) > 21) {
-        player.innerHTML = '<div>Player\'s Cards</div>' + array;
-        // document.getElementById("hitMeButton").disabled = true;
+    if (handScore(playerHand) > 21) {
+        player.innerHTML = '<div>Player\'s Cards</div>' + playerHand;
     }
     else {
-        array.push(shuffledDeck[4 + i]);
-        player.innerHTML = '<div>Player\'s Cards</div>' + array;
-        i++
+        playerHand.push(shuffledDeck[card + 1]);
+        player.innerHTML = '<div>Player\'s Cards</div>' + playerHand;
+        card++;
     }
-    return array;
+    return playerHand;
 }
 
-// displays score when 'hit me' is clicked
+// displays scores, dealer had, and game results when 'hit me' is clicked
 function playerHandScore() {
-    if (handValue(array) > 21) {
+    if (handScore(playerHand) > 21) {
         playerScore.style.display = 'block';
-        playerScore.innerHTML = '<div>Busted</div>';
+        playerScore.innerHTML = handScore(playerHand);
+        dealerScore.style.display = 'block';
+        dealerScore.innerHTML = handScore(dealerHand);
+        dealer.innerHTML = '<div>Dealer\'s Cards</div>' + dealerHand;
+        gameResult.style.display = 'block';
+        gameResult.innerHTML = '<h2>You Lose :(</h2>';
     }
     else {
         playerScore.style.display = 'block';
-        playerScore.innerHTML = handValue(array);
+        playerScore.innerHTML = handScore(playerHand);
     }
-    return handValue(array);
+    return handScore(playerHand);
 }
 
-// const finalPlayerScore = playerHandScore();
 let dealerHand = dealerStartingHand();
 
 function updateDealerHand() {
     dealer.innerHTML = '<div>Dealer\'s Cards</div>' + dealerHand[0];
-    if (handValue(dealerHand) < 17) {
-        dealerHand.push(shuffledDeck[4 + i]);
+    while (handScore(dealerHand) < 17) {
+        dealerHand.push(shuffledDeck[4 + card]);
+        card++;
     }
-    else if (handValue(dealerHand) > 21) {}
-    else {}
     dealer.innerHTML = '<div>Dealer\'s Cards</div>' + dealerHand;
     dealer.style.display = 'block';
     dealerScore.style.display = 'block';
-    dealerScore.innerHTML = handValue(dealerHand);
+    dealerScore.innerHTML = handScore(dealerHand);
     return dealerHand;
 }
 
 function findWinner() {
-    if (handValue(updateDealerHand()) > 21) {
+    if (handScore(updateDealerHand()) > 21) {
         gameResult.style.display = 'block';
         gameResult.innerHTML = '<h2>You Win!</h2>';
     }
-    else if (playerHandScore() > handValue(updateDealerHand()) && playerHandScore() <= 21) {
+    else if (playerHandScore() > handScore(updateDealerHand()) && playerHandScore() <= 21) {
         gameResult.style.display = 'block';
         gameResult.innerHTML = '<h2>You Win!</h2>';
     }
@@ -141,7 +136,7 @@ function findWinner() {
         gameResult.style.display = 'block';
         gameResult.innerHTML = '<h2>You Lose :(</h2>';
     }
-    else if (playerHandScore() < handValue(updateDealerHand()) && playerHandScore() <= 21) {
+    else if (playerHandScore() < handScore(updateDealerHand()) && playerHandScore() <= 21) {
         gameResult.style.display = 'block';
         gameResult.innerHTML = '<h2>You Lose :(</h2>';
     }
@@ -156,8 +151,8 @@ function findWinner() {
 document.querySelector('button').addEventListener('click', function(){
     dealer.innerHTML = '<div>Dealer\'s Cards</div>' + dealerStartingHand()[0];
     dealer.style.display = 'block';
-    player.innerHTML = '<div>Player\'s Cards</div>' + playerCards()
+    player.innerHTML = '<div>Player\'s Cards</div>' + playerStartingHand()
     player.style.display = 'block';
     playerScore.style.display = 'block';
-    playerScore.innerHTML = handValue(array);
+    playerScore.innerHTML = handScore(playerHand);
 })

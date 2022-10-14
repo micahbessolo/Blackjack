@@ -76,4 +76,5 @@ button {
 #gameResult {
     display: none;
     font-size: larger;
+    color: white;
 }
