@@ -1,12 +1,3 @@
-// HTML elements
-const dealer = document.getElementById('dealerHand');
-const player = document.getElementById('playerHand');
-const dealerScore = document.getElementById('dealerScore');
-const playerScore = document.getElementById('playerScore');
-const gameResult = document.getElementById('gameResult');
-const stayButton = document.getElementById('stayButton');
-const hitMeButton = document.getElementById('hitMeButton');
-
 const ranks = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K'];
 const suits = ['C', 'S', 'H', 'D'];
 
@@ -37,18 +28,6 @@ function shuffleDeck() {
 
 const shuffledDeck = shuffleDeck();
 
-function dealerStartingHand() {
-    let dealer = [];
-    dealer.push(shuffledDeck[0], shuffledDeck[1]);
-    return dealer;
-}
-
-function playerStartingHand() {
-    let player = [];
-    player.push(shuffledDeck[2], shuffledDeck[3]);
-    return player;
-}
-
 function handScore(handArray) {
     let score = 0;
     let aceArray = []; // to revalue aces from 11 to 1 depending on score
@@ -75,8 +54,17 @@ function handScore(handArray) {
 }
 
 let card = 4; // card position in the shuffled deck
-let playerHand = playerStartingHand(); // player's hand, which can be added to
-let dealerHand = dealerStartingHand();
+let playerHand = [shuffledDeck[2], shuffledDeck[3]];
+let dealerHand = [shuffledDeck[0], shuffledDeck[1]];
+
+// HTML elements
+const dealer = document.getElementById('dealerHand');
+const player = document.getElementById('playerHand');
+const dealerScore = document.getElementById('dealerScore');
+const playerScore = document.getElementById('playerScore');
+const gameResult = document.getElementById('gameResult');
+const stayButton = document.getElementById('stayButton');
+const hitMeButton = document.getElementById('hitMeButton');
 
 // adds card to player when 'hit me' is clicked and hand <= 21. displays hand
 function hitMe() {
@@ -144,9 +132,9 @@ function findWinner() {
 
 // gives 'start game' button functionality
 document.querySelector('button').addEventListener('click', function(){
-    dealer.innerHTML = '<div>Dealer\'s Cards</div>' + dealerStartingHand()[0];
+    dealer.innerHTML = '<div>Dealer\'s Cards</div>' + dealerHand[0];
     dealer.style.display = 'block';
-    player.innerHTML = '<div>Player\'s Cards</div>' + playerStartingHand()
+    player.innerHTML = '<div>Player\'s Cards</div>' + playerHand
     player.style.display = 'block';
     playerScore.style.display = 'block';
     playerScore.innerHTML = handScore(playerHand);
