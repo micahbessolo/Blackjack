@@ -35,7 +35,7 @@ function shuffleDeck() {
     return shuffledDeck
 }
 
-let shuffledDeck = shuffleDeck();
+const shuffledDeck = shuffleDeck();
 
 function dealerStartingHand() {
     let dealer = [];
@@ -76,6 +76,7 @@ function handScore(handArray) {
 
 let card = 4; // card position in the shuffled deck
 let playerHand = playerStartingHand(); // player's hand, which can be added to
+let dealerHand = dealerStartingHand();
 
 // adds card to player when 'hit me' is clicked and hand <= 21. displays hand
 function hitMe() {
@@ -90,25 +91,24 @@ function hitMe() {
     return playerHand;
 }
 
-// displays scores, dealer had, and game results when 'hit me' is clicked
+// displays player score. If player busts, shows dealer score and game results when 'hit me' is clicked
 function playerHandScore() {
+    playerScore.style.display = 'block';
     if (handScore(playerHand) > 21) {
-        playerScore.style.display = 'block';
         playerScore.innerHTML = handScore(playerHand);
+        // shows dealer score and hand if player busts
         dealerScore.style.display = 'block';
         dealerScore.innerHTML = handScore(dealerHand);
         dealer.innerHTML = '<div>Dealer\'s Cards</div>' + dealerHand;
+        // shows game result if player busts
         gameResult.style.display = 'block';
         gameResult.innerHTML = '<h2>You Lose :(</h2>';
     }
     else {
-        playerScore.style.display = 'block';
         playerScore.innerHTML = handScore(playerHand);
     }
     return handScore(playerHand);
 }
-
-let dealerHand = dealerStartingHand();
 
 function updateDealerHand() {
     dealer.innerHTML = '<div>Dealer\'s Cards</div>' + dealerHand[0];
@@ -124,27 +124,22 @@ function updateDealerHand() {
 }
 
 function findWinner() {
+    gameResult.style.display = 'block';
     if (handScore(updateDealerHand()) > 21) {
-        gameResult.style.display = 'block';
         gameResult.innerHTML = '<h2>You Win!</h2>';
     }
     else if (playerHandScore() > handScore(updateDealerHand()) && playerHandScore() <= 21) {
-        gameResult.style.display = 'block';
         gameResult.innerHTML = '<h2>You Win!</h2>';
     }
     else if (playerHandScore() > 21) {
-        gameResult.style.display = 'block';
         gameResult.innerHTML = '<h2>You Lose :(</h2>';
     }
     else if (playerHandScore() < handScore(updateDealerHand()) && playerHandScore() <= 21) {
-        gameResult.style.display = 'block';
         gameResult.innerHTML = '<h2>You Lose :(</h2>';
     }
     else {
-        gameResult.style.display = 'block';
         gameResult.innerHTML = '<h2>Tied</h2>';
     }
-    
 }
 
 // gives 'start game' button functionality
