@@ -61,7 +61,7 @@ function display(element, content) {
 }
 
 // gives 'start game' button functionality
-function startGame(){
+function newGame(){
     display(dealerElement, '<div>Dealer\'s Cards</div>' + dealerHand[0]);
     display(playerElement, '<div>Player\'s Cards</div>' + playerHand);
     display(playerScoreElement, handScore(playerHand));
@@ -72,6 +72,8 @@ function hitMe() {
     playerHand.push(shuffledDeck[card + 1]);
     if (handScore(playerHand) > 21) {
         display(playerElement, '<div>Player\'s Cards</div>' + playerHand);
+        display(dealerElement, '<div>Dealer\'s Cards</div>' + dealerHand);
+        display(dealerScoreElement, handScore(dealerHand));
         display(gameResultElement, '<h2>You Lose :(</h2>');
     }
     else {
