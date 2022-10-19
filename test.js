@@ -1,16 +1,16 @@
-// function waitforme(ms) {
-//     return new Promise( resolve => {
-//         setTimeout(()=> {resolve('')}, ms );
-//     })
-// }
+function waitforme(ms) {
+    return new Promise( resolve => {
+        setTimeout(()=> {resolve('')}, ms );
+    })
+}
 
-// async function printy() {
-//     for (let i = 0; i < 10; i++) {
-//         await waitforme(1000);
-//         console.log(i);
-//     }
-// }
-// printy();
+async function printy() {
+    for (let i = 0; i < 10; i++) {
+        await waitforme(1000);
+        console.log(i);
+    }
+}
+printy();
 
 let initialNumber = [];
 

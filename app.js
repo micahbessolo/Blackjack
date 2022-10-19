@@ -1,4 +1,6 @@
+let shuffledDeck; let dealerHand; let playerHand; // global variables
 let card = 3; // card position to be incremented in the shuffledDeck array
+// https://www.sololearn.com/compiler-playground/WgwkqRoaDp3Y/#html
 
 function shuffleDeck() {
     const straightDeck = ['A-C', 'A-S', 'A-H', 'A-D', '2-C', '2-S', '2-H', '2-D', '3-C', '3-S', '3-H', '3-D', '4-C', '4-S', '4-H', '4-D', '5-C', '5-S', '5-H', '5-D', '6-C', '6-S', '6-H', '6-D', '7-C', '7-S', '7-H', '7-D', '8-C', '8-S', '8-H', '8-D', '9-C', '9-S', '9-H', '9-D', '10-C', '10-S', '10-H', '10-D', 'J-C', 'J-S', 'J-H', 'J-D', 'Q-C', 'Q-S', 'Q-H', 'Q-D', 'K-C', 'K-S', 'K-H', 'K-D'];
@@ -40,7 +42,7 @@ function handScore(handArray) {
     return score;
 }
 
-// displays dealer hand and dealer score
+// takes hand array displays dealer hand and dealer score
 function displayDealerHand(hand) {
     document.getElementById('dealerHand').innerHTML = '<div>Dealer\'s Cards</div>' + hand;
     document.getElementById('dealerHand').style.display = 'block';
@@ -49,20 +51,20 @@ function displayDealerHand(hand) {
 }
 
 // displays dealer hand and dealer score
-function displayPlayerHand(hand) {
-    document.getElementById('playerHand').innerHTML = '<div>Player\'s Cards</div>' + hand;
+function displayPlayerHand() {
+    document.getElementById('playerHand').innerHTML = '<div>Player\'s Cards</div>' + playerHand;
     document.getElementById('playerHand').style.display = 'block';
-    document.getElementById('playerScore').innerHTML = handScore(hand);
+    document.getElementById('playerScore').innerHTML = handScore(playerHand);
     document.getElementById('playerScore').style.display = 'block';
 }
 
 // gives 'start game' button functionality
-function newGame(){
+function newGame() {
     shuffledDeck = shuffleDeck();
     dealerHand = [shuffledDeck[0], shuffledDeck[1]];
     playerHand = [shuffledDeck[2], shuffledDeck[3]];
     displayDealerHand([dealerHand[0]]);
-    displayPlayerHand(playerHand);
+    displayPlayerHand();
 }
 
 function displayWin() {
@@ -76,27 +78,23 @@ function displayLoss() {
 }
 
 // when 'hit me' button clicked
-// 1. adds card to playerHand array
-// 2. if player score > 21 shows player & dealer hands, dealer's score, and says 'you lose'
-// 3. if player score < 21 shows player hand and increments card position
 function hitMe() {
     playerHand.push(shuffledDeck[card + 1]);
     if (handScore(playerHand) > 21) {
         displayDealerHand(dealerHand);
-        displayPlayerHand(playerHand);
         displayLoss();
     }
-    else {
-        displayPlayerHand(playerHand);
+    else {  
         card++;
     }
+    displayPlayerHand();
 }
 
 // On 'Stay' button click, if dealer score < 17 pushes new cards to their array
 // displays the dealer hand and dealer score
 function updateDealerHand() {
     while (handScore(dealerHand) < 17) {
-        dealerHand.push(shuffledDeck[4 + card]);
+        dealerHand.push(shuffledDeck[4 + card]); // feeling like this should just be [card]
         card++;
     }
     displayDealerHand(dealerHand);
