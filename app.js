@@ -1,6 +1,6 @@
-let shuffledDeck; let dealerHand; let playerHand; // global variables
+// global variables
+let shuffledDeck; let dealerHand; let playerHand;
 let card = 3; // card position to be incremented in the shuffledDeck array
-// https://www.sololearn.com/compiler-playground/WgwkqRoaDp3Y/#html
 
 function shuffleDeck() {
     const straightDeck = ['A-C', 'A-S', 'A-H', 'A-D', '2-C', '2-S', '2-H', '2-D', '3-C', '3-S', '3-H', '3-D', '4-C', '4-S', '4-H', '4-D', '5-C', '5-S', '5-H', '5-D', '6-C', '6-S', '6-H', '6-D', '7-C', '7-S', '7-H', '7-D', '8-C', '8-S', '8-H', '8-D', '9-C', '9-S', '9-H', '9-D', '10-C', '10-S', '10-H', '10-D', 'J-C', 'J-S', 'J-H', 'J-D', 'Q-C', 'Q-S', 'Q-H', 'Q-D', 'K-C', 'K-S', 'K-H', 'K-D'];
@@ -60,6 +60,7 @@ function displayPlayerHand() {
 
 // gives 'start game' button functionality
 function newGame() {
+    document.getElementById('gameResult').style.display = 'none';
     shuffledDeck = shuffleDeck();
     dealerHand = [shuffledDeck[0], shuffledDeck[1]];
     playerHand = [shuffledDeck[2], shuffledDeck[3]];
@@ -106,13 +107,15 @@ async function updateDealerHand() {
     // this adds a 1 second delay to adding cards to dealer hand (suspense)
     let delayArray = [dealerHand[0]];
     for (let i = 1; i < dealerHand.length; i++) {
-        delayArray.push(dealerHand[i])
+        delayArray.push(dealerHand[i]);
         await delay(1000);
         displayDealerHand(delayArray);
     }
 }
 
-function findWinner() {
+async function findWinner() {
+    // waits after dealer hand is shown
+    await delay(1000 * (dealerHand.length - 1));
     if (handScore(dealerHand) > 21) {
         displayWin();
     }
