@@ -77,6 +77,12 @@ function displayLoss() {
     document.getElementById('gameResult').style.display = 'block';
 }
 
+function delay(ms) {
+    return new Promise( resolve => {
+        setTimeout(()=> {resolve('')}, ms );
+    })
+}
+
 // when 'hit me' button clicked
 function hitMe() {
     playerHand.push(shuffledDeck[card + 1]);
@@ -92,12 +98,18 @@ function hitMe() {
 
 // On 'Stay' button click, if dealer score < 17 pushes new cards to their array
 // displays the dealer hand and dealer score
-function updateDealerHand() {
+async function updateDealerHand() {
     while (handScore(dealerHand) < 17) {
-        dealerHand.push(shuffledDeck[4 + card]); // feeling like this should just be [card]
+        dealerHand.push(shuffledDeck[card]);
         card++;
     }
-    displayDealerHand(dealerHand);
+    // this adds a 1 second delay to adding cards to dealer hand (suspense)
+    let delayArray = [dealerHand[0]];
+    for (let i = 1; i < dealerHand.length; i++) {
+        delayArray.push(dealerHand[i])
+        await delay(1000);
+        displayDealerHand(delayArray);
+    }
 }
 
 function findWinner() {
