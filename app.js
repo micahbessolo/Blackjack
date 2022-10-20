@@ -66,6 +66,9 @@ function newGame() {
     playerHand = [shuffledDeck[2], shuffledDeck[3]];
     displayDealerHand([dealerHand[0]]);
     displayPlayerHand();
+    // to show images of the cards
+    let dealerImgVar = 'cards_images/' + dealerHand[0] + '.png'
+    document.getElementById("dealerImg").src = dealerImgVar;
 }
 
 function displayWin() {
