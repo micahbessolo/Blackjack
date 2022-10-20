@@ -48,6 +48,11 @@ function displayDealerHand(hand) {
     document.getElementById('dealerHand').style.display = 'block';
     document.getElementById('dealerScore').innerHTML = handScore(hand);
     document.getElementById('dealerScore').style.display = 'block';
+
+    // let dealerImgVar = 'cards_images/' + hand + '.png'
+    // document.getElementById("dealerImg").src = dealerImgVar;
+    // document.getElementById("dealerImg").style.width = '250px';
+    // document.getElementById('dealerHand').style.display = 'block';
 }
 
 // displays dealer hand and dealer score
@@ -66,9 +71,11 @@ function newGame() {
     playerHand = [shuffledDeck[2], shuffledDeck[3]];
     displayDealerHand([dealerHand[0]]);
     displayPlayerHand();
+
     // to show images of the cards
-    let dealerImgVar = 'cards_images/' + dealerHand[0] + '.png'
-    document.getElementById("dealerImg").src = dealerImgVar;
+    // let dealerImgVar = 'cards_images/' + dealerHand[0] + '.png'
+    // document.getElementById("dealerImg").src = dealerImgVar;
+    // document.getElementById("dealerImg").style.width = '250px';
 }
 
 function displayWin() {
