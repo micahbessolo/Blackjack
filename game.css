@@ -78,3 +78,7 @@ button {
     font-size: larger;
     color: white;
 }
+
+#cards * {
+    width: 250px;
+}

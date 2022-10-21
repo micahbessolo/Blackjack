@@ -44,15 +44,25 @@ function handScore(handArray) {
 
 // takes hand array displays dealer hand and dealer score
 function displayDealerHand(hand) {
-    document.getElementById('dealerHand').innerHTML = '<div>Dealer\'s Cards</div>' + hand;
-    document.getElementById('dealerHand').style.display = 'block';
+    // document.getElementById('dealerHand').innerHTML = '<div>Dealer\'s Cards</div>' + hand;
+    // document.getElementById('dealerHand').style.display = 'block';
+    function removeAllChildNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+    }
+    const container = document.querySelector('#cards');
+    removeAllChildNodes(container);
     document.getElementById('dealerScore').innerHTML = handScore(hand);
     document.getElementById('dealerScore').style.display = 'block';
-
-    // let dealerImgVar = 'cards_images/' + hand + '.png'
-    // document.getElementById("dealerImg").src = dealerImgVar;
-    // document.getElementById("dealerImg").style.width = '250px';
-    // document.getElementById('dealerHand').style.display = 'block';
+    document.getElementById('cards').style.display = 'block';
+    for (let i = 0; i < hand.length; i++) {
+        let imgFileName = 'cards_images/' + hand[i] + '.png'
+        const image = document.createElement('img');
+        image.src = imgFileName;
+        const element = document.getElementById('cards');
+        element.append(image);
+    }
 }
 
 // displays dealer hand and dealer score
@@ -111,7 +121,7 @@ function hitMe() {
 // displays the dealer hand and dealer score
 async function updateDealerHand() {
     while (handScore(dealerHand) < 17) {
-        dealerHand.push(shuffledDeck[card]);
+        dealerHand.push(shuffledDeck[card + 3]);
         card++;
     }
     // this adds a 1 second delay to adding cards to dealer hand (suspense)
