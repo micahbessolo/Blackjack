@@ -44,8 +44,6 @@ function handScore(handArray) {
 
 // takes hand array displays dealer hand and dealer score
 function displayDealerHand(hand) {
-    // document.getElementById('dealerHand').innerHTML = '<div>Dealer\'s Cards</div>' + hand;
-    // document.getElementById('dealerHand').style.display = 'block';
     function removeAllChildNodes(parent) {
         while (parent.firstChild) {
             parent.removeChild(parent.firstChild);
@@ -56,21 +54,34 @@ function displayDealerHand(hand) {
     document.getElementById('dealerScore').innerHTML = handScore(hand);
     document.getElementById('dealerScore').style.display = 'block';
     document.getElementById('cards').style.display = 'block';
+    const element = document.getElementById('cards');
     for (let i = 0; i < hand.length; i++) {
         let imgFileName = 'cards_images/' + hand[i] + '.png'
         const image = document.createElement('img');
         image.src = imgFileName;
-        const element = document.getElementById('cards');
         element.append(image);
     }
 }
 
 // displays dealer hand and dealer score
 function displayPlayerHand() {
-    document.getElementById('playerHand').innerHTML = '<div>Player\'s Cards</div>' + playerHand;
-    document.getElementById('playerHand').style.display = 'block';
     document.getElementById('playerScore').innerHTML = handScore(playerHand);
     document.getElementById('playerScore').style.display = 'block';
+    function removeAllChildNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+    }
+    const container = document.querySelector('#playerCards');
+    removeAllChildNodes(container);
+    document.getElementById('cards').style.display = 'block';
+    const element = document.getElementById('playerCards');
+    for (let i = 0; i < playerHand.length; i++) {
+        let imgFileName = 'cards_images/' + playerHand[i] + '.png'
+        const image = document.createElement('img');
+        image.src = imgFileName;
+        element.append(image);
+    }
 }
 
 // gives 'start game' button functionality
@@ -81,11 +92,6 @@ function newGame() {
     playerHand = [shuffledDeck[2], shuffledDeck[3]];
     displayDealerHand([dealerHand[0]]);
     displayPlayerHand();
-
-    // to show images of the cards
-    // let dealerImgVar = 'cards_images/' + dealerHand[0] + '.png'
-    // document.getElementById("dealerImg").src = dealerImgVar;
-    // document.getElementById("dealerImg").style.width = '250px';
 }
 
 function displayWin() {
