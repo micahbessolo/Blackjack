@@ -30,6 +30,7 @@ function handScore(handArray) {
             score += 11;
             aceArray.push(rank);
         }
+        else if (rank === 'gray_back') {}
         else {
             score += Number(rank);
         }
@@ -54,7 +55,6 @@ function displayDealerHand(hand) {
     removeAllChildNodes(container);
     document.getElementById('dealerScore').innerHTML = handScore(hand);
     document.getElementById('dealerScore').style.display = 'block';
-    document.getElementById('dealerCards').style.display = 'block';
     const element = document.getElementById('dealerCards');
     for (let i = 0; i < hand.length; i++) {
         let imgFileName = 'cards_images/' + hand[i] + '.png'
@@ -66,10 +66,10 @@ function displayDealerHand(hand) {
 
 // displays dealer hand and dealer score
 function displayPlayerHand() {
-    document.getElementById('playerScore').innerHTML = handScore(playerHand);
-    document.getElementById('playerScore').style.display = 'block';
     const container = document.querySelector('#playerCards');
     removeAllChildNodes(container);
+    document.getElementById('playerScore').innerHTML = handScore(playerHand);
+    document.getElementById('playerScore').style.display = 'block';
     const element = document.getElementById('playerCards');
     for (let i = 0; i < playerHand.length; i++) {
         let imgFileName = 'cards_images/' + playerHand[i] + '.png'
@@ -85,7 +85,7 @@ function newGame() {
     shuffledDeck = shuffleDeck();
     dealerHand = [shuffledDeck[0], shuffledDeck[1]];
     playerHand = [shuffledDeck[2], shuffledDeck[3]];
-    displayDealerHand([dealerHand[0]]);
+    displayDealerHand([dealerHand[0], 'gray_back']);
     displayPlayerHand();
 }
 
