@@ -42,19 +42,20 @@ function handScore(handArray) {
     return score;
 }
 
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 // takes hand array displays dealer hand and dealer score
 function displayDealerHand(hand) {
-    function removeAllChildNodes(parent) {
-        while (parent.firstChild) {
-            parent.removeChild(parent.firstChild);
-        }
-    }
-    const container = document.querySelector('#cards');
+    const container = document.querySelector('#dealerCards');
     removeAllChildNodes(container);
     document.getElementById('dealerScore').innerHTML = handScore(hand);
     document.getElementById('dealerScore').style.display = 'block';
-    document.getElementById('cards').style.display = 'block';
-    const element = document.getElementById('cards');
+    document.getElementById('dealerCards').style.display = 'block';
+    const element = document.getElementById('dealerCards');
     for (let i = 0; i < hand.length; i++) {
         let imgFileName = 'cards_images/' + hand[i] + '.png'
         const image = document.createElement('img');
@@ -67,14 +68,8 @@ function displayDealerHand(hand) {
 function displayPlayerHand() {
     document.getElementById('playerScore').innerHTML = handScore(playerHand);
     document.getElementById('playerScore').style.display = 'block';
-    function removeAllChildNodes(parent) {
-        while (parent.firstChild) {
-            parent.removeChild(parent.firstChild);
-        }
-    }
     const container = document.querySelector('#playerCards');
     removeAllChildNodes(container);
-    document.getElementById('cards').style.display = 'block';
     const element = document.getElementById('playerCards');
     for (let i = 0; i < playerHand.length; i++) {
         let imgFileName = 'cards_images/' + playerHand[i] + '.png'
