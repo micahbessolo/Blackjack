@@ -11,26 +11,24 @@
 </head>
 <body>
     <h1 class="mt-4 bj">21 BlackJack</h1>
-    <button class="mt-2" onclick="newGame();">New Game</button>
     <h2>Dealer</h2>
+    <div id="dealerScore"></div>
     <div id="dealerCards">
         <!-- card image elements -->
     </div>
-
-    
-    <div id="dealerScore"></div>
-
-    <div id="gameResult" class="pt-2"></div>
-
-    <h2>Player</h2>
-    <div>
+    <div id="gameResult" class="pt-2 result">
+    </div>
+    <img src='cards_images/gray_back.png' alt="card deck" class="pt-4" width="150px">
+    <div class="pt-3">
+        <button class="mt-2" onclick="newGame();">New Game</button>
         <button id="stayButton" onclick="updateDealerHand(); findWinner();">Stay</button>
         <button id="hitMeButton" onclick="hitMe();">Hit me</button>
     </div>
-    <div id="playerCards"  class="pt-1">
+    <h2>Player</h2>
+    <div id="playerScore" class="mt-2"></div>
+    <div id="playerCards"  class="mt-1">
         <!-- card image elements -->
     </div>
-    <div id="playerScore"></div>
 </body>
 <script src="app.js"></script>
 </html>

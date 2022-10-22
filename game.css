@@ -81,8 +81,13 @@ button:hover {
 #gameResult {
     display: none;
     font-size: larger;
-    color: black;
+    
     /* background-color: white; */
+    width: auto;
+}
+
+.result {
+    color: white;
 }
 
 #dealerCards * {

@@ -90,12 +90,12 @@ function newGame() {
 }
 
 function displayWin() {
-    document.getElementById('gameResult').innerHTML = '<h2>You Win!</h2>';
+    document.getElementById('gameResult').innerHTML = '<h3>You Win!</h3>';
     document.getElementById('gameResult').style.display = 'block';
 }
 
 function displayLoss() {
-    document.getElementById('gameResult').innerHTML = '<h2>You Lose :(</h2>';
+    document.getElementById('gameResult').innerHTML = '<h3>You Lose :(</h3>';
     document.getElementById('gameResult').style.display = 'block';
 }
 
@@ -150,7 +150,7 @@ async function findWinner() {
         displayLoss();
     }
     else {
-        document.getElementById('gameResult').innerHTML = '<h2>Tied</h2>';
+        document.getElementById('gameResult').innerHTML = '<h3>Tied</h3>';
         document.getElementById('gameResult').style.display = 'block';
     }
 }
