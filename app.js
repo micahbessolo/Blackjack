@@ -54,7 +54,7 @@ function displayDealerHand(hand) {
     const container = document.querySelector('#dealerCards');
     removeAllChildNodes(container);
     document.getElementById('dealerScore').innerHTML = handScore(hand);
-    document.getElementById('dealerScore').style.display = 'block';
+    document.getElementById('dealerScore').style.display = 'inline-block';
     const element = document.getElementById('dealerCards');
     for (let i = 0; i < hand.length; i++) {
         let imgFileName = 'cards_images/' + hand[i] + '.png'
@@ -69,7 +69,7 @@ function displayPlayerHand() {
     const container = document.querySelector('#playerCards');
     removeAllChildNodes(container);
     document.getElementById('playerScore').innerHTML = handScore(playerHand);
-    document.getElementById('playerScore').style.display = 'block';
+    document.getElementById('playerScore').style.display = 'inline-block';
     const element = document.getElementById('playerCards');
     for (let i = 0; i < playerHand.length; i++) {
         let imgFileName = 'cards_images/' + playerHand[i] + '.png'
@@ -81,6 +81,7 @@ function displayPlayerHand() {
 
 // gives 'start game' button functionality
 function newGame() {
+    document.getElementById('hitMeButton').disabled = false;
     document.getElementById('gameResult').style.display = 'none';
     shuffledDeck = shuffleDeck();
     dealerHand = [shuffledDeck[0], shuffledDeck[1]];
@@ -89,8 +90,26 @@ function newGame() {
     displayPlayerHand();
 }
 
+// animation so cards come out of deck to player and dealer
+var id = null;
+function animation() {
+    var elem = document.getElementById("animatedDeck");   
+    var pos = 0;
+    clearInterval(id);
+    id = setInterval(frame, 1);
+    function frame() {
+      if (pos == 68) {
+        clearInterval(id);
+      } else {
+        pos++; 
+        elem.style.top = pos + '%'; 
+        elem.style.left = '50%'; 
+      }
+    }
+}
+
 function displayWin() {
-    document.getElementById('gameResult').innerHTML = '<h3>You Win!</h3>';
+    document.getElementById('gameResult').innerHTML = '<h3>🎉 You Win! 🎉</h3>';
     document.getElementById('gameResult').style.display = 'block';
 }
 
@@ -111,6 +130,7 @@ function hitMe() {
     if (handScore(playerHand) > 21) {
         displayDealerHand(dealerHand);
         displayLoss();
+        document.getElementById('hitMeButton').disabled = true;
     }
     else {  
         card++;

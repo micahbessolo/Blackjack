@@ -28,6 +28,11 @@ h2 {
     border-radius: 5px;
     margin-top: 15px;
     color: white;
+    display: inline;
+}
+
+.dealerData *{
+    display: inline;
 }
 
 button {
@@ -75,13 +80,13 @@ button:hover {
     width: 30px;
     height: 29px;
     border-radius: 15px;
+    margin-bottom: 15px;
     display: none;
 }
 
 #gameResult {
     display: none;
     font-size: larger;
-    
     /* background-color: white; */
     width: auto;
 }
@@ -96,4 +101,17 @@ button:hover {
 
 #playerCards * {
     width: 150px;
+}
+
+#animationContainer {
+    position: relative;
+    width: 1500px;
+    margin: auto;
+    /* background-color: peachpuff; */
+}
+
+#animatedDeck {
+    position: absolute;
+    left: 100px;
+    bottom: 180px;
 }
