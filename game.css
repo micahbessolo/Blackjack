@@ -31,10 +31,6 @@ h2 {
     display: inline;
 }
 
-.dealerData *{
-    display: inline;
-}
-
 button {
     border-radius: 5px;
 }
@@ -71,6 +67,8 @@ button:hover {
     height: 29px;
     border-radius: 15px;
     display: none;
+    position: relative;
+    top: -5px;
 }
 
 #dealerScore {
@@ -80,8 +78,13 @@ button:hover {
     width: 30px;
     height: 29px;
     border-radius: 15px;
-    margin-bottom: 15px;
+    position: relative;
+    top: -5px;
     display: none;
+}
+
+.buttons {
+    padding-bottom: 8px;
 }
 
 #gameResult {

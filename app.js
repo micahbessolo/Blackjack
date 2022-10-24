@@ -114,7 +114,7 @@ function displayWin() {
 }
 
 function displayLoss() {
-    document.getElementById('gameResult').innerHTML = '<h3>You Lose :(</h3>';
+    document.getElementById('gameResult').innerHTML = '<h3>You Lose 😞</h3>';
     document.getElementById('gameResult').style.display = 'block';
 }
 

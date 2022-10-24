@@ -14,12 +14,12 @@
         <h1 class="mt-4 bj">21 BlackJack</h1>
         <h2>Dealer</h2>
         <div id="dealerScore"></div>
-        <div id="dealerCards">
+        <div id="dealerCards" class="pt-1">
             <!-- card image elements -->
         </div>
         <div id="gameResult" class="pt-2 result"></div>
         <img src='cards_images/gray_back.png' alt="card deck" id="animatedDeck" class="deck pt-4" width="150px">
-        <div class="pt-3">
+        <div class="buttons pt-3">
             <button class="mt-2" onclick="newGame();">New Game</button>
             <button id="stayButton" onclick="updateDealerHand(); findWinner();">Stay</button>
             <button id="hitMeButton" onclick="hitMe();">Hit me</button>
