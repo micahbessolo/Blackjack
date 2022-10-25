@@ -98,12 +98,12 @@ function animation() {
     clearInterval(id);
     id = setInterval(frame, 1);
     function frame() {
-      if (pos == 68) {
+      if (pos == 350) {
         clearInterval(id);
       } else {
-        pos++; 
-        elem.style.top = pos + '%'; 
-        elem.style.left = '50%'; 
+        pos+=10; 
+        elem.style.top = "calc(320px + " + pos + 'px)';
+        elem.style.left = pos + 'px';
       }
     }
 }
