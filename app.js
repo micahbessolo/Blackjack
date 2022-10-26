@@ -91,31 +91,36 @@ function newGame() {
 }
 
 // animation so cards come out of deck to player and dealer
-var id = null;
-function animation() {
-    var elem = document.getElementById("animatedDeck");   
-    var pos = 0;
+//  horizontal: .41 is right & -.41 left
+// vertical: -.64 is up 1 is down
+function animation(vertical, horizontal) {
+    let id = null;
+    const elem = document.getElementById("animatedDeck");
+    let pos = 0;
     clearInterval(id);
     id = setInterval(frame, 1);
     function frame() {
-      if (pos == 350) {
-        clearInterval(id);
-      } else {
-        pos+=10; 
-        elem.style.top = "calc(320px + " + pos + 'px)';
-        elem.style.left = pos + 'px';
-      }
+        if (pos == 380) {
+            clearInterval(id);
+        }
+        else {
+            pos+=10;
+            elem.style.top = 'calc(320px + ' + pos + 'px * ' + vertical + ')';
+            elem.style.left = 'calc(' + pos + 'px * ' + horizontal + ')';
+        }
     }
 }
 
 function displayWin() {
     document.getElementById('gameResult').innerHTML = '<h3>🎉 You Win! 🎉</h3>';
     document.getElementById('gameResult').style.display = 'block';
+    document.getElementById('hitMeButton').disabled = true;
 }
 
 function displayLoss() {
     document.getElementById('gameResult').innerHTML = '<h3>You Lose 😞</h3>';
     document.getElementById('gameResult').style.display = 'block';
+    document.getElementById('hitMeButton').disabled = true;
 }
 
 function delay(ms) {
@@ -130,7 +135,6 @@ function hitMe() {
     if (handScore(playerHand) > 21) {
         displayDealerHand(dealerHand);
         displayLoss();
-        document.getElementById('hitMeButton').disabled = true;
     }
     else {  
         card++;
