@@ -79,20 +79,15 @@ function displayPlayerHand() {
     }
 }
 
-// gives 'start game' button functionality
-function newGame() {
-    document.getElementById('hitMeButton').disabled = false;
-    document.getElementById('gameResult').style.display = 'none';
-    shuffledDeck = shuffleDeck();
-    dealerHand = [shuffledDeck[0], shuffledDeck[1]];
-    playerHand = [shuffledDeck[2], shuffledDeck[3]];
-    displayDealerHand([dealerHand[0], 'gray_back']);
-    displayPlayerHand();
+function delay(ms) {
+    return new Promise( resolve => {
+        setTimeout(()=> {resolve('')}, ms );
+    })
 }
 
 // animation so cards come out of deck to player and dealer
-//  horizontal: .41 is right & -.41 left
 // vertical: -.64 is up 1 is down
+// horizontal: .41 is right & -.41 left
 function animation(vertical, horizontal) {
     let id = null;
     const elem = document.getElementById("animatedDeck");
@@ -111,6 +106,24 @@ function animation(vertical, horizontal) {
     }
 }
 
+// gives 'start game' button functionality
+async function newGame() {
+    document.getElementById('hitMeButton').disabled = false;
+    document.getElementById('gameResult').style.display = 'none';
+    shuffledDeck = shuffleDeck();
+    dealerHand = [shuffledDeck[0], shuffledDeck[1]];
+    playerHand = [shuffledDeck[2], shuffledDeck[3]];
+    animation(-.64, -.41);
+    await delay(200);
+    animation(-.64, .41);
+    displayDealerHand([dealerHand[0], 'gray_back']);
+    await delay(200);
+    animation(1, -.41);
+    await delay(200);
+    animation(1, .41);
+    displayPlayerHand();
+}
+
 function displayWin() {
     document.getElementById('gameResult').innerHTML = '<h3>🎉 You Win! 🎉</h3>';
     document.getElementById('gameResult').style.display = 'block';
@@ -121,12 +134,6 @@ function displayLoss() {
     document.getElementById('gameResult').innerHTML = '<h3>You Lose 😞</h3>';
     document.getElementById('gameResult').style.display = 'block';
     document.getElementById('hitMeButton').disabled = true;
-}
-
-function delay(ms) {
-    return new Promise( resolve => {
-        setTimeout(()=> {resolve('')}, ms );
-    })
 }
 
 // when 'hit me' button clicked
