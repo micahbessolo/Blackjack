@@ -88,9 +88,10 @@ function delay(ms) {
 // animation so cards come out of deck to player and dealer
 // vertical: -.64 is up 1 is down
 // horizontal: .41 is right & -.41 left
-function animation(vertical, horizontal) {
+async function animation(vertical, horizontal) {
     let id = null;
     const elem = document.getElementById("animatedDeck");
+    elem.style.display = 'block';
     let pos = 0;
     clearInterval(id);
     id = setInterval(frame, 1);
@@ -100,10 +101,12 @@ function animation(vertical, horizontal) {
         }
         else {
             pos+=10;
-            elem.style.top = 'calc(320px + ' + pos + 'px * ' + vertical + ')';
-            elem.style.left = 'calc(' + pos + 'px * ' + horizontal + ')';
+            elem.style.top = `calc(320px + ${pos}px * ${vertical})`;
+            elem.style.left = `calc(${pos}px * ${horizontal})`;
         }
     }
+    await delay(200);
+    document.getElementById("animatedDeck").style.display = 'none';
 }
 
 // gives 'start game' button functionality
@@ -122,6 +125,7 @@ async function newGame() {
     await delay(200);
     animation(1, .41);
     displayPlayerHand();
+    await delay(200);
 }
 
 function displayWin() {
@@ -138,12 +142,15 @@ function displayLoss() {
 
 // when 'hit me' button clicked
 function hitMe() {
+    let hitMeCount = 0; // tracks cards to change animation position
     playerHand.push(shuffledDeck[card + 1]);
     if (handScore(playerHand) > 21) {
+        animation(1, .81);
         displayDealerHand(dealerHand);
         displayLoss();
     }
     else {  
+        animation(1, .81);
         card++;
     }
     displayPlayerHand();
@@ -161,6 +168,9 @@ async function updateDealerHand() {
     for (let i = 1; i < dealerHand.length; i++) {
         delayArray.push(dealerHand[i]);
         await delay(1000);
+        if (i > 1) {
+            animation(-.64, .81)
+        }
         displayDealerHand(delayArray);
     }
 }
