@@ -172,7 +172,7 @@ async function updateDealerHand() {
         delayArray.push(dealerHand[i]);
         await delay(1000);
         if (i > 1) {
-            animation(-.64, .81)
+            animation(-.64, .81);
         }
         displayDealerHand(delayArray);
     }
@@ -194,7 +194,7 @@ async function findWinner() {
         displayLoss();
     }
     else {
-        document.getElementById('gameResult').innerHTML = '<h3>Tied</h3>';
+        document.getElementById('gameResult').innerHTML = '<h3>😐 Tied 😐</h3>';
         document.getElementById('gameResult').style.display = 'block';
     }
 }
