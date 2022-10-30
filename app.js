@@ -51,6 +51,7 @@ function removeAllChildNodes(parent) {
 
 // takes hand array displays dealer hand and dealer score
 function displayDealerHand(hand) {
+    document.getElementById('dealerCards').style.display = 'block';
     const container = document.querySelector('#dealerCards');
     removeAllChildNodes(container);
     document.getElementById('dealerScore').innerHTML = handScore(hand);
@@ -66,6 +67,7 @@ function displayDealerHand(hand) {
 
 // displays dealer hand and dealer score
 function displayPlayerHand() {
+    document.getElementById('playerCards').style.display = 'block';
     const container = document.querySelector('#playerCards');
     removeAllChildNodes(container);
     document.getElementById('playerScore').innerHTML = handScore(playerHand);
@@ -113,6 +115,8 @@ async function animation(vertical, horizontal) {
 async function newGame() {
     document.getElementById('hitMeButton').disabled = false;
     document.getElementById('gameResult').style.display = 'none';
+    document.getElementById('dealerCards').style.display = 'none';
+    document.getElementById('playerCards').style.display = 'none';
     shuffledDeck = shuffleDeck();
     dealerHand = [shuffledDeck[0], shuffledDeck[1]];
     playerHand = [shuffledDeck[2], shuffledDeck[3]];
@@ -142,7 +146,6 @@ function displayLoss() {
 
 // when 'hit me' button clicked
 function hitMe() {
-    let hitMeCount = 0; // tracks cards to change animation position
     playerHand.push(shuffledDeck[card + 1]);
     if (handScore(playerHand) > 21) {
         animation(1, .81);
