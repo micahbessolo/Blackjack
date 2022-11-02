@@ -1,6 +1,9 @@
 // global variables
 let shuffledDeck; let dealerHand; let playerHand;
 let card = 3; // card position to be incremented in the shuffledDeck array
+const money = new Audio('moneySound.mp3');
+const loser = new Audio('losingBleeps.mp3');
+const dealing = new Audio('cardDealing.mp3');
 
 function shuffleDeck() {
     const straightDeck = ['A-C', 'A-S', 'A-H', 'A-D', '2-C', '2-S', '2-H', '2-D', '3-C', '3-S', '3-H', '3-D', '4-C', '4-S', '4-H', '4-D', '5-C', '5-S', '5-H', '5-D', '6-C', '6-S', '6-H', '6-D', '7-C', '7-S', '7-H', '7-D', '8-C', '8-S', '8-H', '8-D', '9-C', '9-S', '9-H', '9-D', '10-C', '10-S', '10-H', '10-D', 'J-C', 'J-S', 'J-H', 'J-D', 'Q-C', 'Q-S', 'Q-H', 'Q-D', 'K-C', 'K-S', 'K-H', 'K-D'];
@@ -113,6 +116,7 @@ async function animation(vertical, horizontal) {
 
 // gives 'start game' button functionality
 async function newGame() {
+    dealing.play();
     document.getElementById('hitMeButton').disabled = false;
     document.getElementById('gameResult').style.display = 'none';
     document.getElementById('dealerCards').style.display = 'none';
@@ -133,12 +137,14 @@ async function newGame() {
 }
 
 function displayWin() {
+    money.play();
     document.getElementById('gameResult').innerHTML = '<h3>🎉 You Win! 🎉</h3>';
     document.getElementById('gameResult').style.display = 'block';
     document.getElementById('hitMeButton').disabled = true;
 }
 
 function displayLoss() {
+    loser.play();
     document.getElementById('gameResult').innerHTML = '<h3>You Lose 😞</h3>';
     document.getElementById('gameResult').style.display = 'block';
     document.getElementById('hitMeButton').disabled = true;
