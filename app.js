@@ -113,7 +113,7 @@ async function animation(vertical, horizontal) {
 
 // gives 'start game' button functionality
 async function newGame() {
-    const dealing = new Audio('cardDealing.mp3');
+    const dealing = new Audio('sound_effects/cardDealing.mp3');
     dealing.play();
     document.getElementById('hitMeButton').disabled = false;
     document.getElementById('gameResult').style.display = 'none';
@@ -135,7 +135,7 @@ async function newGame() {
 }
 
 function displayWin() {
-    const money = new Audio('moneySound.mp3');
+    const money = new Audio('sound_effects/moneySound.mp3');
     money.play();
     document.getElementById('gameResult').innerHTML = '<h3>🎉 You Win! 🎉</h3>';
     document.getElementById('gameResult').style.display = 'block';
@@ -143,7 +143,7 @@ function displayWin() {
 }
 
 function displayLoss() {
-    const loser = new Audio('losingBleeps.mp3');
+    const loser = new Audio('sound_effects/losingBleeps.mp3');
     loser.play();
     document.getElementById('gameResult').innerHTML = '<h3>You Lose 😞</h3>';
     document.getElementById('gameResult').style.display = 'block';
