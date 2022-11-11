@@ -159,6 +159,8 @@ function hitMe() {
         displayLoss();
     }
     else {  
+        const flip = new Audio('sound_effects/cardFlip.mp3');
+        flip.play();
         animation(1, .81);
         card++;
     }
@@ -168,6 +170,7 @@ function hitMe() {
 // On 'Stay' button click, if dealer score < 17 pushes new cards to their array
 // displays the dealer hand and dealer score
 async function updateDealerHand() {
+    const flip = new Audio('sound_effects/cardFlip.mp3');
     while (handScore(dealerHand) < 17) {
         dealerHand.push(shuffledDeck[card + 3]);
         card++;
@@ -180,6 +183,7 @@ async function updateDealerHand() {
         if (i > 1) {
             animation(-.64, .81);
         }
+        flip.play();
         displayDealerHand(delayArray);
     }
 }
