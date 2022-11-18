@@ -20,7 +20,9 @@ function shuffleDeck() {
 function handScore(handArray) {
     let score = 0;
     let aceArray = []; // to revalue aces from 11 to 1 depending on score
-    for (let card = 0; card < handArray.length; card++) {
+    const handArrayLength = handArray.length;
+    const aceArrayLength = aceArray.length;
+    for (let card = 0; card < handArrayLength; card++) {
         // gets card rank (i.e ace, 4, jack)
         const rank = handArray[card].split("-")[0];
         if (rank === 'J' || rank === 'Q' || rank === 'K') {
@@ -35,7 +37,7 @@ function handScore(handArray) {
             score += Number(rank);
         }
     }
-    for (ace = 0; ace < aceArray.length; ace++) {
+    for (ace = 0; ace < aceArrayLength; ace++) {
         if (score > 21) {
             score -= 10;
         }
@@ -43,6 +45,7 @@ function handScore(handArray) {
     return score;
 }
 
+// for removing hands after rounds
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
@@ -57,7 +60,8 @@ function displayDealerHand(hand) {
     document.getElementById('dealerScore').innerHTML = handScore(hand);
     document.getElementById('dealerScore').style.display = 'inline-block';
     const element = document.getElementById('dealerCards');
-    for (let i = 0; i < hand.length; i++) {
+    const handLength = hand.length;
+    for (let i = 0; i < handLength; i++) {
         let imgFileName = 'cards_images/' + hand[i] + '.png'
         const image = document.createElement('img');
         image.src = imgFileName;
@@ -73,7 +77,8 @@ function displayPlayerHand() {
     document.getElementById('playerScore').innerHTML = handScore(playerHand);
     document.getElementById('playerScore').style.display = 'inline-block';
     const element = document.getElementById('playerCards');
-    for (let i = 0; i < playerHand.length; i++) {
+    const playerHandLength = playerHand.length;
+    for (let i = 0; i < playerHandLength; i++) {
         let imgFileName = 'cards_images/' + playerHand[i] + '.png'
         const image = document.createElement('img');
         image.src = imgFileName;
