@@ -4,9 +4,14 @@ let card = 3; // card position to be incremented in the shuffledDeck array
 
 // adding betting ability
 function bet() {
-    let whiteOne = 1;
-    let redFive = 5;
-    let blueTen = 10;
+    const whiteOne = 1; // 25 - 25
+    const redFive = 5; // 10 - 50
+    const green25 = 25; // 5 - 125
+    // start with bet before dealing
+    // splitting pairs (if two of same denomination) player can split cards into 2 hands and bet on both
+    // double down option if player has 9, 10, or 11
+
+    // 21 scores gets 1.5 times the bet
 }
 
 function shuffleDeck() {
