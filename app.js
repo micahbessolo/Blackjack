@@ -11,6 +11,12 @@ function bet() {
     // splitting pairs (if two of same denomination) player can split cards into 2 hands and bet on both
     // double down option if player has 9, 10, or 11
 
+    let whiteAmount = 25;
+    let redAmount = 50;
+    let greenAmount = 5;
+
+    const totalMoney = (whiteOne * whiteAmount) + (redFive * redAmount) + (green25 * greenAmount);
+
     // 21 scores gets 1.5 times the bet
 }
 
