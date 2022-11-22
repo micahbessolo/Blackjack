@@ -71,6 +71,10 @@ button:hover {
     top: -5px;
 }
 
+.playerInfo div {
+    display: inline;
+}
+
 #dealerScore {
     background-color: white;
     margin-left: auto;
